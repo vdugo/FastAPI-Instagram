@@ -1,6 +1,6 @@
 from sqlalchemy.orm.session import Session
 
-from models import DbUser
+from .models import DbUser
 from routers.schemas import UserBase
 
 def create_user(db: Session, request: UserBase):
