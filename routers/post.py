@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, status, HTTPException
+from typing import List
+
+from fastapi import APIRouter, Depends, status, HTTPException, File, UploadFile
 from sqlalchemy.orm.session import Session
 
 from db.database import get_db
@@ -18,3 +20,11 @@ def create(request: PostBase, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, 
                             detail="parameter image_url_type can only take values 'absolute' or 'relative'")
     return db_post.create(db, request)
+
+@router.get('/all', response_model=List[PostDisplay])
+def posts(db: Session = Depends(get_db)):
+    return db_post.get_all(db)
+
+@router.post('/image')
+def upload_image(image: UploadFile = File(...)):
+    pass
