@@ -13,6 +13,7 @@ SQLAlchemy = "^1.4.43"
 passlib = "^1.7.4"
 bcrypt = "^4.0.1"
 python-multipart = "^0.0.5"
+aiofiles = "^22.1.0"
 
 [tool.poetry.dev-dependencies]
 
