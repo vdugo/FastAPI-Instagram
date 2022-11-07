@@ -3,7 +3,7 @@ from sqlalchemy.orm.session import Session
 
 from db.database import get_db
 from db import db_post
-from .schemas import PostBase
+from .schemas import PostBase, PostDisplay
 
 router = APIRouter(
     prefix='/post',
@@ -12,7 +12,7 @@ router = APIRouter(
 
 image_url_types = ['absolute', 'relative']
 
-@router.post('/')
+@router.post('/', response_model=PostDisplay)
 def create(request: PostBase, db: Session = Depends(get_db)):
     if not request.image_url_type in image_url_types:
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, 

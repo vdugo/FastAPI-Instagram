@@ -33,7 +33,6 @@ class PostDisplay(BaseModel):
     image_url_type: str
     caption: str
     timestamp: datetime
-    user: User
     
     class Config():
         orm_mode = True
