@@ -1,3 +1,6 @@
+import random
+import shutil
+import string
 from typing import List
 
 from fastapi import APIRouter, Depends, status, HTTPException, File, UploadFile
@@ -27,4 +30,13 @@ def posts(db: Session = Depends(get_db)):
 
 @router.post('/image')
 def upload_image(image: UploadFile = File(...)):
-    pass
+    ascii_letters = string.ascii_letters
+    rand_str = ''.join(random.choice(ascii_letters) for i in range(6))
+    new_str = f'_{rand_str}'
+    filename =  new_str.join(image.filename.rsplit('.', 1))
+    path = f'images/{filename}'
+    
+    with open(path, 'w+b') as buffer:
+        shutil.copyfileobj(image.file, buffer)
+        
+    return {"filename": path}
