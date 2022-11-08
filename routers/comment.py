@@ -4,7 +4,7 @@ from sqlalchemy.orm.session import Session
 from auth.oauth2 import get_current_user
 from db import db_comment
 from db.database import get_db
-from schemas import UserAuth, CommentBase
+from .schemas import UserAuth, CommentBase
 
 router = APIRouter(
     prefix='/comment',
