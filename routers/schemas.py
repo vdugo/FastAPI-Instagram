@@ -23,9 +23,12 @@ class PostBase(BaseModel):
 # for PostDisplay
 class User(BaseModel):
     username: str
-    
-    class Config():
-        orm_mode = True
+    timestamp: datetime
+        
+class Comment(BaseModel):
+    text: str
+    username: str
+    timestamp: datetime
     
 class PostDisplay(BaseModel):
     id: int
@@ -33,6 +36,9 @@ class PostDisplay(BaseModel):
     image_url_type: str
     caption: str
     timestamp: datetime
+    # fix these
+    #user: User
+    #comments: list[Comment]
     
     class Config():
         orm_mode = True
@@ -41,3 +47,8 @@ class UserAuth(BaseModel):
     id: int
     username: str
     email: str
+    
+class CommentBase(BaseModel):
+    username: str
+    text: str
+    post_id: int
