@@ -23,7 +23,6 @@ class PostBase(BaseModel):
 # for PostDisplay
 class User(BaseModel):
     username: str
-    timestamp: datetime
     
     class Config():
         orm_mode = True
@@ -42,7 +41,7 @@ class PostDisplay(BaseModel):
     image_url_type: str
     caption: str
     timestamp: datetime
-    user: User
+    user: User | None = None
     comments: list[Comment] | None = None
     
     class Config():
